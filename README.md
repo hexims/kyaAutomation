@@ -539,8 +539,7 @@ Developed and maintained by the ZLocker Team.
 
 For support, issues, or partnership inquiries:
 
-* support@zlocker.io
-* developers@zlocker.io
+ashish@hexims.it
 
 ⸻
 
