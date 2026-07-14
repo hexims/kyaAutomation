@@ -539,7 +539,7 @@ Developed and maintained by the ZLocker Team.
 
 For support, issues, or partnership inquiries:
 
-ashish@hexims.it
+hello@ihex.co
 
 ⸻
 

@@ -206,9 +206,9 @@ FACE_RECOGNITION_API_KEY=your_face_api_key
 # Email
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-SMTP_USER=noreply@zlocker.com
+SMTP_USER=hello@ihex.co
 SMTP_PASSWORD=email_password
-SMTP_FROM=ZLocker <noreply@zlocker.com>
+SMTP_FROM=ZLocker <hello@ihex.co>
 
 # Security
 CORE_ORIGINS=https://zlocker.example.com,https://app.zlocker.example.com
@@ -294,5 +294,5 @@ redis-cli -h $REDIS_HOST ping
 ## Support
 
 For deployment issues, please open an issue on GitHub or contact:
-- Email: support@zlocker.com
+- Email: hello@ihex.co
 - Discord: [Join our server]

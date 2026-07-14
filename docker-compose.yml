@@ -1,0 +1,95 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: zlocker-backend
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DB_HOST: mysql
+      DB_PORT: 3306
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - mysql
+      - redis
+    volumes:
+      - ./backend:/app/backend
+    networks:
+      - zlocker-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: zlocker-frontend
+    ports:
+      - "3001:3001"
+    environment:
+      REACT_APP_API_URL: http://localhost:3000
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app/frontend
+    networks:
+      - zlocker-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: zlocker-mysql
+    environment:
+      MYSQL_DATABASE: zlocker_dev
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: password
+      MYSQL_USER: zlocker
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./backend/database/migrations:/docker-entrypoint-initdb.d
+    networks:
+      - zlocker-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: zlocker-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - zlocker-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      timeout: 3s
+      retries: 5
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: zlocker-phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - zlocker-network
+
+volumes:
+  mysql-data:
+  redis-data:
+
+networks:
+  zlocker-network:
+    driver: bridge
+ 

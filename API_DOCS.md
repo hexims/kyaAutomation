@@ -442,6 +442,6 @@ result = client.face.verify(video_file)
 ## Support
 
 For API questions and support:
-- Email: api-support@zlocker.com
+- Email: hello@ihex.co
 - Documentation: https://docs.zlocker.com
 - GitHub Issues: https://github.com/hexims/kyaAutomation/issues
